@@ -1,0 +1,42 @@
+<h1><%= @post.title %></h1>
+<hr />
+Post has these tags: <br />
+<%= @post.tags.map(&:name).join(', ') %>
+<hr />
+<div>
+    <%= @post.content %>
+</div>
+<hr />
+<div>
+    <%= link_to("All posts", posts_path) %> |
+    <%= link_to("Edit post", edit_post_path(@post)) %> |
+    <%= link_to("Delete post", post_path(@post), method: :delete) %>
+</div>
+
+<hr />
+<h5>Choose tags</h5>
+<% Tag.all.each do |tag| %>
+    | <%= link_to(tag.name, tag_post_path(id: @post.id, tag_id: tag.id), method: :patch) %>
+<% end %>
+|
+<hr />
+
+<%= @comments.each do |c| %>
+    <p><b><%= c.author_name %></b></p>
+    <p><%= c.content %></p>
+    <p><%= link_to("Delete comment", comment_path(c), method: :delete) %></p>
+    <hr />
+<% end %>
+
+<% form_for @comment do |f| %>
+    <%= f.label :author_name %>
+    <br />
+    <%= f.text_field :author_name %>
+    <br />
+    <%= f.label :content %>
+    <br />
+    <%= f.text_area :content %>
+    <br />
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit %>
+<% end %>

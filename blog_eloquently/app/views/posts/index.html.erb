@@ -1,0 +1,14 @@
+<h1>Posts</h1>
+<p>This is a list of posts on our blog.</p>
+
+<div>
+    <%= link_to("New post", new_post_path) %>
+</div>
+
+<hr />
+
+<% @posts.each do |p| %>
+    <p>
+        <%= link_to(p.title, posts_path(p)) %>
+    </p>
+<% end %>
