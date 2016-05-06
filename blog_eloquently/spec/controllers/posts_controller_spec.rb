@@ -2,6 +2,14 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
+    describe "GET new" do
+        it 'sets @post' do
+            get :new
+            # @post <-> assigns[:post]
+            expect(assigns[:post]).to eq(Post.new)
+        end
+    end
+    
     describe "GET index" do
         it 'correctly sets up @posts for the view' do
             p = create(:post)
