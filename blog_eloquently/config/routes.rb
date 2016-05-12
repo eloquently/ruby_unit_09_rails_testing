@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :posts do
     patch 'add_tag/:tag_id', on: :member, action: 'add_tag', as: 'tag'
   end
