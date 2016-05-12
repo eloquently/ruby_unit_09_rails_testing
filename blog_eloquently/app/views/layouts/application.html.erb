@@ -7,22 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user.nil? %>
-    <%= link_to("Log in", new_user_session_path) %> | 
-    <%= link_to("Sign up", new_user_registration_path) %>
-  <% else %>
-    You are signed in as <%= current_user.email %>.
-    <%= link_to("Log out", destroy_user_session_path, method: :delete) %>
-  <% end %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  
-  <div class="header">
-    <h4>Our Blog</h4>
-  </div>
-  <hr />
-
-<%= yield %>
-
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <a href=<%= root_path %> class="navbar-brand">
+                Our Blog
+            </a>
+            <ul class="nav navbar-nav">
+                <% if current_user.nil? %>
+                    <li><%= link_to("Log in", new_user_session_path) %></li>
+                    <li><%= link_to("Sign up", new_user_registration_path) %></li>
+                <% else %>
+                    <li>Welcome <%= current_user.email %>.</li>
+                    <li>%= link_to("Log out", destroy_user_session_path, method: :delete) %></li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
+    <% if notice or alert %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    <div class="container">
+        <%= yield %>
+    </div>
 </body>
 </html>
