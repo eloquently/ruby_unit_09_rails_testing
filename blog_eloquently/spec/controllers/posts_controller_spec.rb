@@ -6,7 +6,7 @@ RSpec.describe PostsController, type: :controller do
         it 'sets @post' do
             get :new
             # @post <-> assigns[:post]
-            expect(assigns[:post]).to eq(Post.new)
+            expect(assigns[:post]).to be_a_new(Post)
         end
     end
     

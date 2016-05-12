@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :add_tag]
     
-    before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+    #before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
 
     def index
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     end
 
     def add_tag
-        @tag = Tag.find(params[:id])
+        @tag = Tag.find(params[:tag_id])
         @post.tags << @tag
         redirect_to @post
     end
@@ -52,6 +52,6 @@ class PostsController < ApplicationController
 
     # strong parameters
     def post_params
-        params.require(:post).permit(:title, :comtent)
+        params.require(:post).permit(:title, :content)
     end
 end

@@ -21,14 +21,14 @@ Post has these tags: <br />
 |
 <hr />
 
-<%= @comments.each do |c| %>
+<% @comments.each do |c| %>
     <p><b><%= c.author_name %></b></p>
     <p><%= c.content %></p>
     <p><%= link_to("Delete comment", comment_path(c), method: :delete) %></p>
     <hr />
 <% end %>
 
-<% form_for @comment do |f| %>
+<%= form_for @comment do |f| %>
     <%= f.label :author_name %>
     <br />
     <%= f.text_field :author_name %>
